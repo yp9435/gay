@@ -17,6 +17,18 @@
             min-height: 100vh;
         }
 
+        button {
+            background: #ffe066;
+            color: #a85d00;
+            border: 2.5px solid #ff960e;
+            border-radius: 18px;
+            padding: 12px 28px;
+            font-family: 'Jersey 10', cursive;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(255, 183, 3, 0.13);
+            cursor: pointer;
+        }
+
         h1 {
             font-family: 'Jersey 10', cursive;
             font-size: 3.2rem;
@@ -63,6 +75,7 @@
         .gif-heading {
             font-family: 'Jersey 10', cursive;
             font-size: 40px;
+            font-weight: 400;
             color: #eb8508;
             text-align: center;
             margin: 0;
@@ -298,7 +311,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="playBirthdayAudio()">
     <h1>Happy Birthday Gayuuuu!!!! <span><img src="image/cake.gif" alt="cake" style="width: 100px; margin-bottom: -30px; padding-left: 30px;"></span></h1>
 
     <p>
@@ -323,7 +336,7 @@
     <div class="main-flex">
         <div class="gif-section">
             <img class="giant-gif" src="image/baby-happy-duck.gif" alt="Giant GIF">
-            <h1 class="gif-heading">GAY has turned 21 ! ! !</h1>
+            <h1 class="gif-heading">GAY turned 21 ! ! !</h1>
         </div>
         <div class="paper">
             <div class="tape tape-1"></div>
@@ -364,9 +377,14 @@
             </div>
         </div>
     </div>
+    <button onclick="playBirthdayAudio()" style="position:fixed;top:20px;right:20px;z-index:2000;">
+    Click on this for songgggg i tried to make it autoplay but it didnt work :()
+    </button>
     <div>
-        <img class="sticky-footer-gif" src="image/fe3271c2f92d9d098bd5a3281eb889e5.gif" alt="Cute Duck GIF">
+        <img class="sticky-footer-gif" src="image/fe3271c2f92d9d098bd5a3281eb889e5.gif" alt="GIF">
     </div>
+    <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;"></canvas>
+    
 
     <script>
         function toggleItem(circle) {
@@ -435,6 +453,108 @@
         document.querySelectorAll('.line input').forEach(input => {
             input.readOnly = true;
         });
+
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const ctx = confettiCanvas.getContext('2d');
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        confettiCanvas.width = W;
+        confettiCanvas.height = H;
+
+        window.addEventListener('resize', () => {
+            W = window.innerWidth;
+            H = window.innerHeight;
+            confettiCanvas.width = W;
+            confettiCanvas.height = H;
+        });
+
+        const confettiColors = [
+            "#f7a103", "#FF6B6B", "#87CEEB", "#eb8508", "#fff196", "#6f4403", "#2C2C2C"
+        ];
+
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function ConfettiParticle() {
+            this.x = randomInt(0, W);
+            this.y = randomInt(-H, 0);
+            this.r = randomInt(6, 12);
+            this.d = randomInt(10, 8); // SHORTER confetti length
+            this.color = confettiColors[randomInt(0, confettiColors.length - 1)];
+            this.tilt = randomInt(-10, 10);
+            this.tiltAngleIncremental = (Math.random() * 0.07) + .05;
+            this.tiltAngle = 0;
+
+            this.draw = function() {
+                ctx.beginPath();
+                ctx.lineWidth = this.r;
+                ctx.strokeStyle = this.color;
+                ctx.moveTo(this.x + this.tilt + (this.r / 3), this.y);
+                ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.d);
+                ctx.stroke();
+            }
+        }
+
+        let confettiActive = true;
+        let confettiParticles = [];
+        for (let i = 0; i < 120; i++) {
+            confettiParticles.push(new ConfettiParticle());
+        }
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, W, H);
+            for (let i = 0; i < confettiParticles.length; i++) {
+                confettiParticles[i].draw();
+            }
+            updateConfetti();
+            if (confettiActive || confettiParticles.length > 0) {
+                requestAnimationFrame(drawConfetti);
+            }
+        }
+
+        function updateConfetti() {
+            for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                let p = confettiParticles[i];
+                p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                p.x += Math.sin(0.01 * p.d);
+
+                p.tiltAngle += p.tiltAngleIncremental;
+                p.tilt = Math.sin(p.tiltAngle) * 15;
+
+                if (p.y > H) {
+                    if (confettiActive) {
+                        confettiParticles[i] = new ConfettiParticle();
+                        confettiParticles[i].x = randomInt(0, W);
+                        confettiParticles[i].y = -10;
+                    } else {
+                        confettiParticles.splice(i, 1); // Remove particle if not active
+                    }
+                }
+            }
+        }
+
+        // Stop generating new confetti after 5 seconds
+        setTimeout(() => {
+            confettiActive = false;
+        }, 5000);
+
+        drawConfetti();
+        
+        function playBirthdayAudio() {
+            let audio = document.getElementById('birthday-audio');
+            if (!audio) {
+                audio = document.createElement('audio');
+                audio.id = 'birthday-audio';
+                audio.src = 'music.mp3';
+                audio.loop = true;
+                audio.volume = 0.5; // Set volume (0.0 to 1.0)
+                document.body.appendChild(audio);
+            } else {
+                audio.volume = 0.5; // Set volume if already exists
+            }
+            audio.play();
+        }
     </script>
 </body>
 </html>
