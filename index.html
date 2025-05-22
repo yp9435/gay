@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday GAYUUU!!!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff196;
+            font-family: 'Homemade Apple', cursive;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Jersey 10', cursive;
+            font-size: 3.2rem;
+            color: #f7a103;
+            padding: 22px 32px 0px 80px;
+            letter-spacing: 2px;
+            margin-top: 40px;
+        }
+
+        p {
+            font-family: 'Homemade Apple', cursive;
+            font-size: 1.35rem;
+            color: #6f4403;
+            padding: 0px 32px 0px 80px;
+            max-width: 800px;
+            line-height: 1.7;
+            letter-spacing: 0.5px;
+        }
+
+        .main-flex {
+            margin-top: -300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .gif-section {
+            margin-top: 200px;
+            padding-left: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .giant-gif {
+            max-width: 320px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .gif-heading {
+            font-family: 'Jersey 10', cursive;
+            font-size: 40px;
+            color: #eb8508;
+            text-align: center;
+            margin: 0;
+        }
+
+        .paper {
+            margin-left: 300px;
+            background: white;
+            width: 400px;
+            height: 500px;
+            position: relative;
+            transform: rotate(-2deg);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Tape pieces */
+        .tape {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            opacity: 0.8;
+        }
+
+        .tape-1 {
+            background: #fcc9239c;
+            top: -20px;
+            left: 50px;
+            transform: rotate(25deg);
+        }
+
+
+        .tape-3 {
+            background: #fcc9239c;
+            bottom: 80px;
+            right: -20px;
+            transform: rotate(45deg);
+        }
+
+        .tape-4 {
+            background: #87CEEB;
+            bottom: 150px;
+            left: -25px;
+            transform: rotate(-30deg);
+        }
+
+        .content {
+            padding: 80px 60px;
+            height: calc(100% - 160px);
+            position: relative;
+        }
+
+        .title {
+            font-size: 50px;
+            margin-top: -45px;
+            font-family: 'Jersey 10', cursive;
+            color: #2C2C2C;
+            margin-bottom: 40px;
+            text-align: left;
+            line-height: 1.2;
+            transform: rotate(1deg);
+        }
+
+        .sun {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            transform: rotate(-2deg);
+        }
+
+        .sun img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            transform: rotate(-0.5deg);
+        }
+
+        .todo-item:nth-child(even) {
+            transform: rotate(0.5deg);
+        }
+
+        .circle {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #2C2C2C;
+            border-radius: 50%;
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .circle.checked {
+            background: #2C2C2C;
+        }
+
+        .line {
+            flex-grow: 1;
+            height: 3px;
+            background: #2C2C2C;
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .line input {
+            position: absolute;
+            top: -28px; 
+            left: 0;
+            right: 0;
+            border: none;
+            background: transparent;
+            font-family: 'Homemade Apple', cursive;
+            font-size: 18px;
+            color: #2C2C2C;
+            outline: none;
+            font-weight: 400;
+        }
+
+        .line input::placeholder {
+            color: #888;
+        }
+
+        .todo-item.completed .line {
+            opacity: 0.5;
+        }
+
+        .todo-item.completed .line input {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .add-section {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            transform: rotate(1deg);
+        }
+
+        .add-circle {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #2C2C2C;
+            border-radius: 50%;
+            margin-right: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2C2C2C;
+        }
+
+        .add-input {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 3px solid #2C2C2C;
+            background: transparent;
+            font-family: 'Kalam', cursive;
+            font-size: 18px;
+            color: #2C2C2C;
+            outline: none;
+            padding: 5px 0;
+        }
+
+        .add-input::placeholder {
+            color: #888;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            font-size: 24px;
+            color: #2C2C2C;
+            transform: rotate(-15deg);
+        }
+
+        .delete-btn {
+            margin-left: 10px;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            color: #FF6B6B;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .todo-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .sticky-footer-gif {
+            position: fixed;
+            left: 24px;
+            bottom: -35px;
+            width: 220px;
+            height: auto;
+            z-index: 100;
+            border-radius: 16px;
+        }
+
+        .inline-svg {
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            margin: 0 0.15em;
+        }
+
+        .animated-svg {
+        animation: updown 1.0s  infinite alternate;
+        }
+
+        @keyframes updown {
+            0%   { transform: translateY(0);}
+            100% { transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday Gayuuuu!!!! <span><img src="image/cake.gif" alt="cake" style="width: 100px; margin-bottom: -30px; padding-left: 30px;"></span></h1>
+
+    <p>
+        ure a big girl nowww 21,
+        <img class="inline-svg animated-svg" src="image/1.svg" alt="icon1">
+        i know it feels depressing sometimes
+        <img class="inline-svg animated-svg" src="image/2.svg" alt="icon2">
+        but you got this dont worry!
+        <img class="inline-svg animated-svg" src="image/3.svg" alt="icon3">
+        mwah,
+        <img class="inline-svg animated-svg" src="image/4.svg" alt="icon4">
+        made sure to include baby gay so that you wont feel lonely
+        <img class="inline-svg animated-svg" src="image/5.svg" alt="icon5">
+        when it evolves like mine did.
+        <img class="inline-svg animated-svg" src="image/6.svg" alt="icon6">
+        --- yeshiiiii
+        <img class="inline-svg animated-svg" src="image/7.svg" alt="icon7">
+        <img class="inline-svg animated-svg" src="image/8.svg" alt="icon8">
+        <img class="inline-svg animated-svg" src="image/9.svg" alt="icon9">
+        <img class="inline-svg animated-svg" src="image/10.svg" alt="icon10">
+    </p>
+    <div class="main-flex">
+        <div class="gif-section">
+            <img class="giant-gif" src="image/baby-happy-duck.gif" alt="Giant GIF">
+            <h1 class="gif-heading">GAY has turned 21 ! ! !</h1>
+        </div>
+        <div class="paper">
+            <div class="tape tape-1"></div>
+            <div class="tape tape-3"></div>
+            <div class="tape tape-4"></div>
+            
+            <div class="content">
+                <div class="title">Goals</div>
+                <div class="title" style="font-size: 30px; margin-top: -40px;">for the dayyy</div>
+                
+                <div class="sun">
+                    <img src="image/9.svg" alt="Sun" style="width:100%;height:100%;object-fit:contain;">
+                </div>
+                
+                <ul class="todo-list" id="todoList">
+                    <li class="todo-item">
+                        <div class="circle" onclick="toggleItem(this)"></div>
+                        <div class="line">
+                            <input type="text" value="Eat lots of cake 🎂" onclick="editItem(this)">
+                        </div>
+                        <button class="delete-btn" onclick="deleteItem(this)">×</button>
+                    </li>
+                    <li class="todo-item">
+                        <div class="circle" onclick="toggleItem(this)"></div>
+                        <div class="line">
+                            <input type="text" value="do Leetcodeeee!" onclick="editItem(this)">
+                        </div>
+                        <button class="delete-btn" onclick="deleteItem(this)">×</button>
+                    </li>
+                </ul>
+            
+                <div class="add-section">
+                    <div class="add-circle" onclick="addNewItem()">+</div>
+                    <input type="text" class="add-input" id="newItemInput" placeholder="Add your birthday wish...">
+                </div>
+                
+                <div class="heart">♡</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <img class="sticky-footer-gif" src="image/fe3271c2f92d9d098bd5a3281eb889e5.gif" alt="Cute Duck GIF">
+    </div>
+
+    <script>
+        function toggleItem(circle) {
+            const todoItem = circle.parentElement;
+            circle.classList.toggle('checked');
+            todoItem.classList.toggle('completed');
+        }
+
+        function editItem(input) {
+            input.readOnly = false;
+            input.focus();
+            input.select();
+            
+            input.onblur = function() {
+                input.readOnly = true;
+            };
+            
+            input.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    input.readOnly = true;
+                    input.blur();
+                }
+            };
+        }
+
+        function deleteItem(btn) {
+            btn.parentElement.remove();
+        }
+
+        function addNewItem() {
+            const input = document.getElementById('newItemInput');
+            const text = input.value.trim();
+
+            if (text === '') return;
+
+            const todoList = document.getElementById('todoList');
+            const currentItems = todoList.querySelectorAll('li.todo-item').length;
+
+            if (currentItems >= 5) {
+                alert('sorry gayu, anga space illa, just do 5 a day lol');
+                input.value = '';
+                return;
+            }
+
+            const newItem = document.createElement('li');
+            newItem.className = 'todo-item';
+
+            newItem.innerHTML = `
+                <div class="circle" onclick="toggleItem(this)"></div>
+                <div class="line">
+                    <input type="text" value="${text}" onclick="editItem(this)">
+                </div>
+                <button class="delete-btn" onclick="deleteItem(this)">×</button>
+            `;
+            
+            todoList.appendChild(newItem);
+            input.value = '';
+        }
+
+        document.getElementById('newItemInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addNewItem();
+            }
+        });
+
+        document.querySelectorAll('.line input').forEach(input => {
+            input.readOnly = true;
+        });
+    </script>
+</body>
+</html>
